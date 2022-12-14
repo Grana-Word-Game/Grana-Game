@@ -6,8 +6,9 @@ using UnityEngine.UI;
 public class GameScreenGUI : MonoBehaviour
 {
     [SerializeField] private GUIManager GameScreenGUIManager;
+    [SerializeField] private GameManager GameManager;
 
-    void Start()
+    IEnumerator Start()
     {
         GameScreenGUIManager.GenerateGUICanvas();
         GameScreenGUIManager.GenerateBackgroundCanvas();
@@ -16,6 +17,10 @@ public class GameScreenGUI : MonoBehaviour
         GameScreenGUIManager.GenerateTextInputBox(1);
         GameScreenGUIManager.GenerateBackground(/*Resources.Load<Sprite>("Images/backgroundBlue")*/);
         GameScreenGUIManager.GeneratePauseButton(1);
-        GameScreenGUIManager.GenerateTextBox(new Vector2(0, 200), "GameWordDisplay", new Vector2(Screen.width * .8f, Screen.height * .075f), 100, "Test");
+        // initialize game/logic "StartGame()"
+
+        yield return null;
+
+        GameScreenGUIManager.GenerateTextBox(new Vector2(0, 200), "GameWordDisplay", new Vector2(Screen.width * .8f, Screen.height * .075f), 100, GameManager.GetGameWord());
     }
 }

@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
 {
     //initialize unity details
     [Header(" Game Details ")]
-    [SerializeField] public string gameWord;
+    [SerializeField] private string gameWord;
     [SerializeField] private List<string> anagramsList;
     [SerializeField] private Dictionary<char, int> pointValues;
 
@@ -23,21 +23,6 @@ public class GameManager : MonoBehaviour
     {
         InitializeGame();
         //InitializeTimer() or smth like that
-
-        //word that isn't an anagram: loop
-        submitWord("loop");
-
-        //word that is an anagram: faulted
-        submitWord("faulted");
-
-        //word has already been used
-        submitWord("faulted");
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     //initialize all variables and signal the start of the course with a selected word
@@ -60,9 +45,9 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public void DisplayGameWord()
+    public string GetGameWord()
     {
-         
+        return gameWord;
     }
     //check if the inputted word Can or Cannot be submitted and adjust the point values accordingly.
     public void submitWord(string word)

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Course : MonoBehaviour
 {
     private string courseID;
-    private string currentWord;
+    [SerializeField] private string currentWord;
     private bool isCompleted;
 
     private int totalPoints;
@@ -16,5 +16,9 @@ public class Course : MonoBehaviour
 
     }
 
+    public string GetCurrentWord()
+    {
+        return currentWord;
+    }
 
 }

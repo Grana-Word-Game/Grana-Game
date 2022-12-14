@@ -15,7 +15,8 @@ public class GUIManager : MonoBehaviour
     private GameObject GUICanvas;
     private GameObject BackgroundCanvas;
     private GameObject Keyboard;
-    private GameObject GameManager;
+
+    [SerializeField] private GameObject GameManager;
 
     public void GenerateGUICanvas()
     {
@@ -26,16 +27,18 @@ public class GUIManager : MonoBehaviour
         GUICanvas.transform.parent = empty.transform;
     }
 
-    private void StartGame(string word)
+    public void StartGame(string word, string jsonName)
     {
-        GameManager = Instantiate((GameObject)Resources.Load("Prefabs/GameManagerPrefab"), new Vector3(0f, 0f, 0f), Quaternion.identity);
-        GameManager.name = $"GameManager - Word:  \"{word}\"";
+        GameManager = Instantiate((GameObject)Resources.Load("Prefabs/CoursePrefab"), new Vector3(0f, 0f, 0f), Quaternion.identity);
+        GameManager.name = $"Course - Word:  \"{word}\"";
         GameManager.GetComponent<GameManager>().SetWord(word);
 
 
         //read JSON file of anagramsList and send it to GameManager
-        var stream = File.ReadAllText("./Assets/Resources/anagramsDefault.json");
+        var stream = File.ReadAllText($"./Assets/Resources/{jsonName}");
         var anagramsList = JsonConvert.DeserializeObject<List<string>>(stream);
+        foreach (var anagram in anagramsList)
+            Debug.Log(anagram);
         GameManager.GetComponent<GameManager>().SetAnagramsList(anagramsList);
 
     }
